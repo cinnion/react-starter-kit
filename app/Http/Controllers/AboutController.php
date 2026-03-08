@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class AboutController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $defaultInfo = [
             'BUILD_NUMBER' => 'N/A',
             'BUILD_ID' => 'N/A',
@@ -29,7 +29,7 @@ class AboutController extends Controller
             $buildInfo = json_decode($jsonString, true);
 
             if ($buildInfo === null && json_last_error() != JSON_ERROR_NONE) {
-                throw new \ErrorException('Error decoding the JSON data: ' . json_last_error_msg());
+                throw new \ErrorException('Error decoding the JSON data: '.json_last_error_msg());
             }
         } catch (\ErrorException $e) {
             $buildInfo = $defaultInfo;

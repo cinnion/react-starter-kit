@@ -1,0 +1,55 @@
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: docker/common/php-fpm/Dockerfile
+      tags:
+        - laravel-php-fpm:latest
+      target: production
+    image: laravel-php-fpm
+    env_file:
+      - ./.env
+    volumes:
+      - laravel_public:/var/www/public
+      - laravel_storage:/var/www/storage:rw
+    networks:
+      - laravel
+    healthcheck:
+      test: ["CMD-SHELL", "php-fpm-healthcheck || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/production/nginx/Dockerfile
+      tags:
+        - laravel-web:latest
+    image: laravel-web
+    volumes:
+      - laravel_public:/var/www/public
+      - laravel_storage:/var/www/storage:ro
+    networks:
+      - laravel
+    ports:
+      - 8002:80
+    depends_on:
+      - php-fpm
+
+networks:
+  laravel:
+
+volumes:
+    laravel_public:
+      external: true
+    laravel_storage:
+      external: true
+
+secrets:
+    laravel_env:
+        external: true
+
+# Local Variables:
+# yaml-indent-offset: 2
+# indent-tabs-mode: nil
+# End:

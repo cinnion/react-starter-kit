@@ -28,11 +28,13 @@ const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
         href: 'https://github.com/laravel/react-starter-kit',
+        target: '_blank',
         icon: FolderGit2,
     },
     {
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#react',
+        target: '_blank',
         icon: BookOpen,
     },
 ];

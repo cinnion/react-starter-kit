@@ -52,11 +52,13 @@ const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
         href: 'https://github.com/laravel/react-starter-kit',
+        target: '_blank',
         icon: Folder,
     },
     {
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#react',
+        target: '_blank',
         icon: BookOpen,
     },
 ];
@@ -117,8 +119,8 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                                 <a
                                                     key={item.title}
                                                     href={toUrl(item.href)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
+                                                    target={item.target}
+                                                    rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                                                     className="flex items-center space-x-2 font-medium"
                                                 >
                                                     {item.icon && (
@@ -195,8 +197,8 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                             <TooltipTrigger>
                                                 <a
                                                     href={toUrl(item.href)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
+                                                    target={item.target}
+                                                    rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                                                     className="group inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium text-accent-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                                                 >
                                                     <span className="sr-only">
